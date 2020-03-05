@@ -108,3 +108,73 @@ $$a = \pi * (S)$$
 >   -   The experience gives an "output" of performing action in states: \\((s, a) \rightarrow s'\\) 
 >   -   The performance measures the "worth/reward" of each experience instance: \\(R(s,a)\\)
 >   -   The performance acts as a proxy for the "actual" output, since in simple terms, it is the best "reward", that is accumulated over time as the agent conducts actions.
+
+### Other machine learning
+
+-   Semi-supervised
+-   Active learning
+-   Transfer learning
+-   ...
+
+
+
+## Hypothesis Space
+
+?> Hypothesis Space is the set of all hypotheses over the state space of a given problem that a given algorithm is capable of learning
+
+### Which hypothesis to learn
+
+Consider:
+
+-   Should the experience be matches
+-   Should the performance be maximised
+-   What happens if there is noise
+-   Which hypothesis should be learnt if multiple hypotheses all have the same performance?
+-   Can a good hypothesis be found?
+
+### Ockham's Razor
+
+**Principle**: to prefer the simplest hypothesis that is (reasonably) **consistent with the experience**
+
+![image-20200305165528813](Week01.assets/image-20200305165528813.png)
+
+![image-20200305165538045](Week01.assets/image-20200305165538045.png)
+
+?> Choose the first one since it's the simplest.
+
+### What is the best model to be learnt?
+
+![image-20200305165832802](Week01.assets/image-20200305165832802.png)
+
+The circle dot is the outliner
+
+![image-20200305165850099](Week01.assets/image-20200305165850099.png)
+
+>   3 has the best accuracy amongst all. 
+>
+>   But you should....?
+
+### True Hypothesis & True Error
+
+Machinelearning uses experience ( data sets) which are limited sample of the "true" problem, that is, the unknown target function
+
+We really want to know twhat the performance of a ypothesis is against the target function, known as the **true error**
+
+All algorithms for Machine Learning make a significant assumption.
+
+*The experience is a reasonable representation (or reasonable sample of the true but unknown target function)*
+
+### Core challenge
+
+◦ Deciding what data to use 
+
+◦ Deciding if an algorithm is suitable 
+
+◦ Deciding the most suitable performance measure 
+
+◦ Deciding which hypothesis is “the best” to use for a task
+
+ ◦ Making an ultimate judgement of how to approximate the unknown target function
+
+Core challenge is in **analysis** and **evaluation**
+
