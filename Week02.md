@@ -245,3 +245,177 @@ How to set? Trial and error, prior experience or guidelines
 
 # Global vs Local Minima
 
+>   Even with the appropriate learning rate we may not converge to best optimum
+>
+>   -   This relates to gradient descent in general
+>   -   For linear regression, we will find an optimal solution with gradient descent
+
+## Gradient Descent for Linear Regression
+
+![image-20200312173250614](Week02.assets/image-20200312173250614.png)
+
+Start with some $\theta_1, \theta_0$
+
+Repeat until convergence (gradients are zero in every direction or little or no change between iterations)
+
+-   $\theta_0 = \theta_0 - \alpha\frac{2}{n}\sum_{i=1}^n(h_\theta(x^{(i)}) - y^{(i)})$
+-   $\theta_1 = \theta_1 - \alpha\frac{2}{n}\sum_{i=1}^n(h_\theta(x^{(i)}) - y^{(i)})x^{(i)}$
+-   Stimultaneously update both parameters
+
+
+
+# Multi-Variate Regression
+
+?> Multiple features / variables
+
+![image-20200312173549553](Week02.assets/image-20200312173549553.png)
+
+## Multi-variate hypothesis
+
+Single-variate hypothesis: $h_\theta(x) = \theta_0 + \theta_1x_1$
+
+Multi-variate hypothesis: $h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_mx_m$
+
+-   For $m$ attributes
+-   ($n$ is typically used for the size of the data set)
+
+
+
+## Gradient Descent
+
+Hypothesis: $h_\theta = \theta^Tx = \theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_mx_m$
+
+Parameters: $\theta_0, \theta_1, ..., \theta_m$
+
+Loss function: $J(\theta) = \frac{1}{n}\sum_{i=1}^n(h_\theta(x^{(i)} - y^{(i)})^2$
+
+Gradient descent algorithm:
+
+>   `Repeat {`
+>
+>   ​	$\theta_j = \theta_j - \alpha\frac{\delta}{\delta\theta_j}J(\theta)$
+>
+>   `}`
+
+![image-20200312174332665](Week02.assets/image-20200312174332665.png)
+
+# Issues
+
+### Issues: Hypothesis
+
+We can ask questions about the nature of the hypothesis:
+
+-   Is the regression model (choice of weights) good?
+
+    -   That is, is the hypothesis $h(x)$ a good choice from the Hypothesis Space $H$?
+
+-   Is Linear Regression suitable?
+
+    -   That is, does the hypothesis actually approximate the unknown target function?
+
+        $$h(x) \approx f(x)$$
+
+![image-20200312174542829](Week02.assets/image-20200312174542829.png)
+
+### Issues: Prediction
+
+We can ask questions about what the hypothesis predicts:
+
+-   Is a prediction for an unseen example any good?
+    -   How close are $h(x_{unknown})$ and $f(x_{unknown})$
+
+### Issues: Practical Matters
+
+As many ML methods, Linear Regression "works in theory"
+
+-   However there are practical issues such as
+    -   Limited computation power
+    -   Limited time
+    -   Properties (eccentricities) of the data set
+-   For regression, feature scaling is one such issue
+
+
+
+### Practical Issue: feature scaling
+
+What happens if two features (attributes) have very different domains? 
+
+-   $x_1 =$  temperature (0-40 degree)
+-   $x_2 =$ number of people (1-12 people)
+
+Regression works, but slower
+
+-   Prefer to keep **scale** all features to the same proportion
+-   Typically use **normalisation**
+
+
+
+### Practical Issue: Mean normalisation
+
+Replace each feature $x_i$ with $x_i - \mu_i$ to make features to have approximately zero mean
+
+-   Do not apply to $x_0 = 1$
+
+E.g
+
+-   $x_1 = \frac{temperature-20}{40}$, $-0.5 \le x_1 \le 0.5$
+-   $x_2 = \frac{no.of people - 6}{12}$, $-0.5 \le x_2 \le 0.5$
+
+Further adjust by the standard -deviation $x_i = \frac{x_i - \mu_i}{\sigma_i}$
+
+
+
+### Practical Issue: Gradient decent
+
+-   Adaptive learning rate
+-   Momentum
+
+
+
+# Polynomial Regression
+
+![image-20200312175644863](Week02.assets/image-20200312175644863.png)
+
+
+
+Assumes that the target function (learning task) is a polynomial equation
+
+We have Hypothesis:
+
+-   $h(x) = \theta_0 + \theta_1x_1 + \theta_2x_1^2 + ... + \theta_ix_m + \theta_jx_m^2+...$
+
+## Gradient descent
+
+Loss function is the same: $J(\theta) = \frac{1}{n}\sum_{i=1}^n(h_\theta( x^{(i)}) - y^{(i)}) ^2$
+
+In theory the same gradient descent approach can be use
+
+>   `Repeat {`
+>   ​	$\theta_j = \theta_j - \alpha\frac{\delta}{\delta\theta_j}J(\theta)$
+>   `}`
+
+>[!WARNING]
+>
+>However, feature normalisation becomes very important
+
+# Analytical Regression
+
+## Matrix Form
+
+![image-20200312180217958](Week02.assets/image-20200312180217958.png)
+
+## Solving for weights
+
+Approximated with the analytical "equivalent" of the gradient descent loss function:
+
+-   Quadratic minimisation problem
+-   $min_\theta||y-x\theta||^2$
+    -   Find values of $\theta$ which minimises the above
+
+Has unique solution
+
+-   $\theta = (X^TX)^{-1}X^Ty$
+-   If the attributes are independent
+
+![image-20200312180408723](Week02.assets/image-20200312180408723.png)
+
