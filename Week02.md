@@ -181,3 +181,58 @@ First, consider a simplified version of loss function, forcing \\(\theta_0\\) = 
 -   Parameters: \\(\theta_0, \theta_1\\)
 -   Goal: \\(minJ_{\theta0,\theta1}(\theta_0, \theta_1)\\)
 
+# Gradient Descent
+
+Recall we want to find minimise the loss function,  \\(minJ_{\theta_1}(\theta_1)\\)
+
+General approach:
+
+-   Start with some \\(\theta_0, \theta_1\\)
+    -   Could be random
+    -   Could be based on some heuristics or rules or another ML approach
+-   Update \\(theta_0, theta_1 such that it reduces J(\theta_0, \theta_1)\\)
+    -   Use gradients, that is the derivative of J(\theta_0, \theta_1)
+-   Repeat until the minimum is found
+    -   Hopefully the global minimum
+
+## Differentiating the Loss function
+
+Require the derivative of the loss function: \\(J(\theta_0,\theta_1) = \frac{1}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})^2\\)
+
+-   Derivative with respect to that variable(s)?
+    -   For minimising loss function, this is the weights
+    -   That is \\(\theta_0, \theta_1\\)
+-   As the attributes are independent, so are the weights
+    -   Can take partial derivatives!
+
+#### Partial derivatives
+
+Partial derivatives of the loss function: \\(J(\theta_0,\theta_1) = \frac{1}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})^2\\)
+
+
+
+### Gradient Descent
+
+Consider \\(\alpha\frac{\delta}{\delta\theta}J(\theta_0, \theta_1)\\)
+
+-   Magnitute (direction): \\(\frac{\delta}{\delta\theta_1}J(\theta_0,\theta_1)\\)
+-   Size: \\(\alpha\\) (also called the learning rate), usually non-negative, \\(alpha > 0\\)
+
+
+
+Update for \\(\theta_1\\):
+
+ \\(\theta_1 = \theta_1 - \alpha\frac{\delta}{\delta\theta}J(\theta_0, \theta_1)\\)
+
+### Gradient Descent Approach
+
+-   Start with some \\(\theta_0, \theta_1\\)
+
+-   Repeat until covergence (gradients are zero in every direction or little or no change between iterations)
+
+    -    \\(\theta_1 = \theta_1 - \alpha\frac{\delta}{\delta\theta_1}J(\theta_0, \theta_1)\\)
+
+    -    \\(\theta_0 = \theta_0 - \alpha\frac{\delta}{\delta\theta_0}J(\theta_0, \theta_1)\\)
+
+        
+
