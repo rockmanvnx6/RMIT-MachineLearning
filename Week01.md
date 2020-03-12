@@ -26,11 +26,11 @@ The task can be expressed as **unknown target function**
 
 $$y = f(x)$$
 
--   Attributes of the task: \\(x\\)
+-   Attributes of the task: $x$
 
--   Unknown function: \\(f(x)\\)
+-   Unknown function: $f(x)$
 
--   Output of the function: \\(y\\)
+-   Output of the function: $y$
 
 ML finds a Hypothesis, h, which is a function (or model) which approximatees the unknown target function (the function of the line)
 
@@ -46,8 +46,8 @@ The Experience is denoted D such as
 
 $$ D = \{X, f(X)\}$$
 
--   Attribute of the task: \\(X\\)
--   Output of the Unknown function: \\(f(X)\\)
+-   Attribute of the task: $X$
+-   Output of the Unknown function: $f(X)$
 
 ### Perfornmance
 
@@ -104,9 +104,9 @@ $$a = \pi * (S)$$
 
 >   Reinforcement learning shares similarities with supervised and unsupervised learning:
 >
->   -   The output (action, \\(a\\)) is unknown, however
->   -   The experience gives an "output" of performing action in states: \\((s, a) \rightarrow s'\\) 
->   -   The performance measures the "worth/reward" of each experience instance: \\(R(s,a)\\)
+>   -   The output (action, $a$) is unknown, however
+>   -   The experience gives an "output" of performing action in states: $(s, a) \rightarrow s'$ 
+>   -   The performance measures the "worth/reward" of each experience instance: $R(s,a)$
 >   -   The performance acts as a proxy for the "actual" output, since in simple terms, it is the best "reward", that is accumulated over time as the agent conducts actions.
 
 ### Other machine learning
