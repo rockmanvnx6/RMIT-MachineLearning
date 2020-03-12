@@ -34,7 +34,7 @@ $$y = f(x)$$
 
 ML finds a Hypothesis, h, which is a function (or model) which approximatees the unknown target function (the function of the line)
 
-$$h(x) = f(x)$$
+$$h(x) \approx f(x)$$
 
 -   The hypothesis is **learnt from experience**
 -   A good hypothesis has a **high evaluation from performance measure**
