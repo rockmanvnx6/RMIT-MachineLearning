@@ -39,10 +39,12 @@ Two main types of supervised learning:
 
 The **Experience** is a data set, $D$, of values:
 
-$$D = {x^{(i)}, f(x^{(i)})}$$
+$$D = {\{x^{(i)}, f(x^{(i)})}\}$$
 
 -   Attributes of the task: $x^{(i)}$
 -   Output of the Unknown function: $f(x^{(i)})$
+
+>   **i ** runs from 1 to n, it's for datapont
 
 
 
@@ -72,9 +74,17 @@ The output is continuous $y \in R$
 >   -   Predict distance for each pixel of a 2D image
 >   -   Predicting hospital length-of-stay at time of admission.
 
+Example: Power comsumption
+
+From the temperature, estimate the amount of kWh.
+
+![image-20200318150030315](Week02.assets/image-20200318150030315.png)
+
+
+
 ## Experience
 
-The experience is data set (instances) of inputs and outputs
+The experience is **data set** (instances) of **inputs and outputs**
 
 $$D = \{x^{(i)}, f(x^{(i)})\}$$
 
@@ -91,7 +101,7 @@ $$D = \{x^{(i)}, f(x^{(i)})\}$$
 >[!NOTE]
 >**Univariate**: 1 specific variable quantity
 >
->**Multivariate**: Multiple variables
+>**Multivariate**: Multiple variables, instead of using just temperature, we use more features.
 
 ----
 
@@ -108,13 +118,16 @@ $$h_\theta = \theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_nx_n$$
 
 ![image-20200312144354234](Week02.assets/image-20200312144354234.png)
 
+![image-20200318150639999](Week02.assets/image-20200318150639999.png)
+
 ## Simple Univariate Linear Regression
 
 $$h_\theta(x) = \theta_0 + \theta_1x_1$$
 
 -   "intercept": $\theta_0$
-
 -   "gradient": $\theta_1$
+
+>   Instead of a,b we use theta
 
 >[!TIP]
 >
@@ -124,15 +137,19 @@ $$h_\theta(x) = \theta_0 + \theta_1x_1$$
 
 # Training Linear Regression
 
-## Goal
+## Linear Regression Goal
 
-The goal is to find the "**best**" regression line.
+The goal is to find the "**best**" regression line (hypothesis)
 
 In order to do that, we:
 
 -   Need a measure of **performance**
 -   Minimise the sum of the distance between hypothesis and training exaxmples
--   $h_\theta(x) = \theta_0 + \theta_1x_1$
+-   $h_\theta(x) = \theta_0 + \theta_1x$
+
+![image-20200318151218330](Week02.assets/image-20200318151218330.png)
+
+>   We are trying to minimise the distance between $$h(x')$$ and $$y^1$$
 
 ## Loss Function
 
@@ -140,11 +157,31 @@ Loss Function is the measure of performance
 
 $$J(\theta_0,\theta_1) = \frac{1}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})^2$$
 
+>   With **n** is the number of training examples
+>
+>   $h_\theta(x^{(i)} - y^{(i)})^2$. We need to minimize $J(\theta_0, \theta_1)$
+
 Find a hypothesis that minimises the sum of squared differences between the 
 
 -   Predicted output: $h_\theta(x^{(i)})$
 -   Actual output: $y^{(i)}$
--   For each training example, $x^{(i)}, y^{(i)}$
+-   For each training example, $x^{(i)}, y^{(i)}$ (ith training example)
+
+>   Cost function is to find the best possible straight line
+>
+>   **Idea**: choose $\theta_0, \theta_1$ so that $h_\theta(x)$ is close to $y$ for our training example $(x,y)$
+>
+>   => Have to minimize the square difference of $(h_\theta(x) - y)^2$
+
+Cost function will just be the sum of square difference in each line to the hypothesis.
+
+Example:
+
+-   <img src="Week02.assets/image-20200318154721723.png" alt="image-20200318154721723" style="zoom:80%;" />
+
+
+
+
 
 ![image-20200312161438115](Week02.assets/image-20200312161438115.png)
 
@@ -166,12 +203,26 @@ Find a hypothesis that minimises the sum of squared differences between the
 
 ### Simplified Loss function intuition
 
-First, consider a simplified version of loss function, forcing $\theta_0$ = 0
+First, consider a simplified version of loss function, **forcing $\theta_0$ = 0**
+
+>   Therfore, $h_\theta(x) = \theta_0 + \theta_1x$ = $h_\theta(x) = \theta_1x$. All hypothesis will go through 0.
+>
+>   Why forcing it to 0 ? Just to make it simpler. 
 
 -   Thus, the hypothesis is effectively: $h_\theta(x) = \theta_1x_1$
 -   Minimise: $J(\theta_1)$
     -   That is $J(\theta_1) = \frac{1}{n}\sum_{i=1}^n(\theta_1x_1 ^{(i)} - y^{(i)}) ^2$
 -   Goal: $minJ_{\theta_1}(\theta_1)$
+
+![image-20200318154949984](Week02.assets/image-20200318154949984.png)
+
+-   On the left we assume $\theta_1 = 0$ therefore our hypothesis is the line y = 0.
+
+at $\theta = 0$, we have the square difference:$1^2 + 2^2 + 3^2 + 4^2 = 10^2$
+
+-   Therefore at $\theta_1 = 0$, $J(\theta_1) = 10$.
+-   Now if we choose $\theta_1 = 1$ then, we have the line y = x as the hypothesis. Now the square difference = 0.
+-   So, $J(\theta_1) = 0$
 
 ### Complete loss function intuition
 
@@ -183,6 +234,8 @@ First, consider a simplified version of loss function, forcing $\theta_0$ = 0
 
 # Gradient Descent
 
+## Find los function using gradients
+
 Recall we want to find minimise the loss function,  $minJ_{\theta_1}(\theta_1)$
 
 General approach:
@@ -190,7 +243,7 @@ General approach:
 -   Start with some $\theta_0, \theta_1$
     -   Could be random
     -   Could be based on some heuristics or rules or another ML approach
--   Update $theta_0, theta_1 such that it reduces J(\theta_0, \theta_1)$
+-   Update $theta_0, theta_1$ such that it reduces$ J(\theta_0, \theta_1)$
     -   Use gradients, that is the derivative of J(\theta_0, \theta_1)
 -   Repeat until the minimum is found
     -   Hopefully the global minimum
@@ -209,16 +262,25 @@ Require the derivative of the loss function: $J(\theta_0,\theta_1) = \frac{1}{n}
 
 Partial derivatives of the loss function: $J(\theta_0,\theta_1) = \frac{1}{n}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})^2$
 
-
+![image-20200318163207755](Week02.assets/image-20200318163207755.png)
 
 ### Gradient Descent
+
+>   Modify the fix learning steps to modify. Because you don't want it to jump too big or too small.
+>
+>   Gradient Descent will jump big at first, and then jump smaller and smaller
+>
+>   => Increase in accuracy.
 
 Consider $\alpha\frac{\delta}{\delta\theta}J(\theta_0, \theta_1)$
 
 -   Magnitute (direction): $\frac{\delta}{\delta\theta_1}J(\theta_0,\theta_1)$
+
+>   Derivative of $J(\theta_0, \theta_1)$
+
 -   Size: $\alpha$ (also called the learning rate), usually non-negative, $alpha > 0$
 
-
+>   $\alpha$ defines how big a step we take.
 
 Update for $\theta_1$:
 
@@ -230,6 +292,7 @@ Update for $\theta_1$:
 -   Repeat until covergence (gradients are zero in every direction or little or no change between iterations)
     -    $\theta_1 = \theta_1 - \alpha\frac{\delta}{\delta\theta_1}J(\theta_0, \theta_1)$
     -    $\theta_0 = \theta_0 - \alpha\frac{\delta}{\delta\theta_0}J(\theta_0, \theta_1)$
+    -    Stimutaenously update both.
 
 ---
 
@@ -250,7 +313,7 @@ How to set? Trial and error, prior experience or guidelines
 >   -   This relates to gradient descent in general
 >   -   For linear regression, we will find an optimal solution with gradient descent
 
-## Gradient Descent for Linear Regression
+##  Gradient Descent for Linear Regression
 
 ![image-20200312173250614](Week02.assets/image-20200312173250614.png)
 
@@ -277,7 +340,7 @@ Single-variate hypothesis: $h_\theta(x) = \theta_0 + \theta_1x_1$
 Multi-variate hypothesis: $h_\theta(x) = \theta_0 + \theta_1x_1 + \theta_2x_2 + ... + \theta_mx_m$
 
 -   For $m$ attributes
--   ($n$ is typically used for the size of the data set)
+-   ($n$ is typically used for the size of the data set) 
 
 
 
@@ -291,7 +354,7 @@ Loss function: $J(\theta) = \frac{1}{n}\sum_{i=1}^n(h_\theta(x^{(i)} - y^{(i)})^
 
 Gradient descent algorithm:
 
->   `Repeat {`
+>   `Repeat until convergent(limit){`
 >
 >   ​	$\theta_j = \theta_j - \alpha\frac{\delta}{\delta\theta_j}J(\theta)$
 >
@@ -390,7 +453,7 @@ Loss function is the same: $J(\theta) = \frac{1}{n}\sum_{i=1}^n(h_\theta( x^{(i)
 
 In theory the same gradient descent approach can be use
 
->   `Repeat {`
+>   `Repeat until convergent{`
 >   ​	$\theta_j = \theta_j - \alpha\frac{\delta}{\delta\theta_j}J(\theta)$
 >   `}`
 
@@ -403,6 +466,10 @@ In theory the same gradient descent approach can be use
 ## Matrix Form
 
 ![image-20200312180217958](Week02.assets/image-20200312180217958.png)
+
+>   Matrix form of loss function to hypothesis line.
+>
+>   $\theta = (X^TX)^{-1}X^TY$
 
 ## Solving for weights
 
