@@ -244,7 +244,7 @@ General approach:
     -   Could be random
     -   Could be based on some heuristics or rules or another ML approach
 -   Update $theta_0, theta_1$ such that it reduces$ J(\theta_0, \theta_1)$
-    -   Use gradients, that is the derivative of J(\theta_0, \theta_1)
+    -   Use gradients, that is the derivative of $$J(\theta_0, \theta_1)$$
 -   Repeat until the minimum is found
     -   Hopefully the global minimum
 
